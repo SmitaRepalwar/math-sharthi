@@ -28,7 +28,7 @@ export const ToggleButton = ({ isSidebarOpen, onClickSidebar }) => {
         borderWidth: "0px",
         position: "relative",
         top: 270,
-        left: 14,
+        left: "15%",
       }}
     >
       {isSidebarOpen ? (

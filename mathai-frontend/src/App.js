@@ -10,6 +10,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { AppContext } from "./context";
+import DisplayPage from "./pages/DisplayPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,6 +25,7 @@ function App() {
     <AppContext.Provider value={{ selectedItem, setSelectedItem }}>
       <BrowserRouter>
         <Routes>
+          <Route path="/display" element={<DisplayPage />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route

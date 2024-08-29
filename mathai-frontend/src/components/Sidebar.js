@@ -5,9 +5,8 @@ import {
   Drawer,
   List,
   ListItem,
-  ListItemIcon,
-  ListItemText,
-  Toolbar,
+  useMediaQuery,
+  useTheme,
   Divider,
   Typography,
 } from "@mui/material";
@@ -33,8 +32,12 @@ import PlanModel from "./PlanModel";
 import { BsFillChatRightDotsFill } from "react-icons/bs";
 import { AppContext } from "../context";
 import { IoMdPricetags } from "react-icons/io";
+import { ToggleButton } from "./ToggleButton";
 
-const Sidebar = ({ isSidebarOpen, onClickSidebar }) => {
+const Sidebar = ({ isSidebarOpen }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [previousChatOpen, setPreviousChatOpen] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const { selectedItem, setSelectedItem } = useContext(AppContext);
@@ -126,6 +129,7 @@ const Sidebar = ({ isSidebarOpen, onClickSidebar }) => {
           marginLeft: "10px",
           padding: "10px",
           cursor: "pointer",
+          marginTop: isMobile && "80px",
           // display: isSidebarOpen &&  "flex",
           // flexDirection: isSidebarOpen &&  "column",
           // justifyContent: isSidebarOpen &&  "center"
@@ -295,7 +299,7 @@ const Sidebar = ({ isSidebarOpen, onClickSidebar }) => {
         sx={{
           width: drawerWidth - 20,
           // margin: "0px 0px 100px auto",
-          height: "300px",
+          height: "250px",
           overflow: "auto",
           padding: "10px",
           scrollbarWidth: "none",
@@ -357,59 +361,71 @@ const Sidebar = ({ isSidebarOpen, onClickSidebar }) => {
   };
 
   return (
-    <Drawer
-      variant="permanent"
+    <Box
       sx={{
-        width: drawerWidth,
+        width: "100%",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
         flexShrink: 0,
-        [`& .MuiDrawer-paper`]: {
-          width: drawerWidth,
-          boxSizing: "border-box",
-          backgroundColor: "#000000",
-          overflow: "hidden",
-        },
+        width: drawerWidth,
+        boxSizing: "border-box",
+        backgroundColor: "#000000",
+        overflow: "hidden",
+        position: isMobile && "fixed",
+        top: isMobile && 15,
+        zIndex: isMobile && 1,
       }}
     >
-      <Box
-        onClick={onClickHome}
-        sx={{ margin: "20px 0px 0px 20px", display: "flex", cursor: "pointer" }}
-      >
-        <img
-          src={tectsharthilogo}
-          alt="logo"
-          style={{ height: "30px", width: "33px", marginTop: "10px" }}
-        />
-        {!isSidebarOpen && (
-          <Typography sx={{ marginTop: "10px" }}>
-            <span
-              style={{
-                fontSize: "20px",
-                fontWeight: "bold",
-                background: "linear-gradient(90deg, #ff7e5f, #feb47b)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                marginLeft: "5px",
-              }}
-            >
-              Math
-            </span>
-            <span
-              style={{
-                fontSize: "20px",
-                fontWeight: "bold",
-                background: "linear-gradient(90deg, #2a91ff, #4557f3)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              Sharthi
-            </span>
-          </Typography>
+      <Box sx={{ width: "100%", height: "80%" }}>
+        {!isMobile && (
+          <Box
+            onClick={onClickHome}
+            sx={{
+              margin: "20px 0px 0px 20px",
+              display: "flex",
+              cursor: "pointer",
+            }}
+          >
+            <img
+              src={tectsharthilogo}
+              alt="logo"
+              style={{ height: "30px", width: "33px", marginTop: "10px" }}
+            />
+            {!isSidebarOpen && (
+              <Typography sx={{ marginTop: "10px" }}>
+                <span
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    background: "linear-gradient(90deg, #ff7e5f, #feb47b)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    marginLeft: "5px",
+                  }}
+                >
+                  Math
+                </span>
+                <span
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    background: "linear-gradient(90deg, #2a91ff, #4557f3)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  Sharthi
+                </span>
+              </Typography>
+            )}
+          </Box>
         )}
-      </Box>
-      <RenderListItems />
+        <RenderListItems />
 
-      {previousChatOpen & !isSidebarOpen && <ChatHistoryComponent />}
+        {previousChatOpen & !isSidebarOpen && <ChatHistoryComponent />}
+      </Box>
       <Box
         sx={{
           margin: !isSidebarOpen && "auto 20px 30px 15px",
@@ -468,7 +484,7 @@ const Sidebar = ({ isSidebarOpen, onClickSidebar }) => {
           )}
         </Button>
       </Box>
-    </Drawer>
+    </Box>
   );
 };
 

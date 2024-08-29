@@ -7,6 +7,8 @@ import {
   Typography,
   AppBar,
   Button,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import ContentArea from "../components/ContentArea";
 import tectsharthilogo from "../public/techsharthilogo.png";
@@ -19,6 +21,9 @@ import { useDispatch, useSelector } from "react-redux";
 import GoogleDriveUpload from "../components/GoogleDriveUpload";
 
 function Home() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const dispatch = useDispatch();
   const fileInputRef = React.useRef(null);
   const ImageInputRef = React.useRef(null);
@@ -57,14 +62,14 @@ function Home() {
   };
 
   return (
-    // <Box sx={{overflow: 'hidden', backgroundColor: "#000000", height: "100%",  }}>
     <ContentArea>
       <Box
         sx={{
           height: "100%",
-          width: "600px",
+          width: isMobile ? "100%" : "600px",
           boxSizing: "border-box",
           overflowY: "auto",
+          padding: isMobile ? "10px" : "20px",
           scrollbarWidth: "none" /* Firefox */,
           "-ms-overflow-style": "none" /* IE and Edge */,
           "&::-webkit-scrollbar": {
@@ -72,15 +77,13 @@ function Home() {
           },
         }}
       >
-        <Header />
+        {/* <Header /> */}
         <UploadSection
           fileInputRef={fileInputRef}
           pdfInputRef={pdfInputRef}
           ImageInputRef={ImageInputRef}
         />
-        {/* <GoogleDriveUpload /> */}
         <AISection />
-        {/* <TemplatesSection /> */}
       </Box>
       <InputContainer
         fileInputRef={fileInputRef}
@@ -88,7 +91,6 @@ function Home() {
         pdfInputRef={pdfInputRef}
       />
     </ContentArea>
-    // </Box>
   );
 }
 

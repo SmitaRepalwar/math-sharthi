@@ -12,7 +12,7 @@ import { LuFilePlus2 } from "react-icons/lu";
 // import {useDispatch} from "react-redux"
 // import {useNavigate} from "react-router-dom"
 // import { useLocation } from 'react-router-dom';
-// import GoogleDriveUpload from "../components/GoogleDriveUpload";
+import GoogleDriveUpload from "../components/GoogleDriveUpload";
 import pdfImage from "../public/pdfImage.png";
 // import { addNewChat } from '../store/store';
 
@@ -86,7 +86,6 @@ const UploadSection = ({
             alignItems: "center",
             alignSelf: "center",
             width: "100%",
-            textAlign: "center",
           }}
         >
           <Button
@@ -94,12 +93,13 @@ const UploadSection = ({
             size="small"
             color="primary"
             onClick={pdfPage ? onUploadPdfClick : onUploadFileClick}
+            sx={{ marginLeft: "auto" }}
           >
             {" "}
             <LuFilePlus2 style={{ marginRight: "5px" }} />
             {pdfPage ? "Upload PDF" : "Upload Files"}
           </Button>
-          {/* <GoogleDriveUpload fileInputRef={fileInputRef} /> */}
+          <GoogleDriveUpload />
           {/* <Button variant="outlined" sx={{ml: "auto", alignSelf: "flex-end" }}><i className="material-icons"></i></Button> */}
         </Box>
       </Box>
