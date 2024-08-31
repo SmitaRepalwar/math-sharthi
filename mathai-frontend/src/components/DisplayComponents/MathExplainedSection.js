@@ -1,8 +1,12 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import mathExplainedText from "../../public/mathExplainedText.png";
 import devider from "../../public/devider.png";
+import { height } from "@mui/system";
 
 export const MathExplainedSection = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const subjectsLeft = [
     {
       title: "Elementary math",
@@ -42,65 +46,93 @@ export const MathExplainedSection = () => {
   return (
     <Box
       sx={{
-        height: "14%",
+        height: "auto",
         width: "100%",
-        padding: "40px 0px 40px 0px",
+        padding: isMobile ? "10px" : "40px 0px",
       }}
     >
       <Box sx={{ width: "100%", textAlign: "center" }}>
-        <img src={mathExplainedText} />
+        <img
+          src={mathExplainedText}
+          alt="Math Explained"
+          style={{
+            height: isMobile && "40px",
+            width: isMobile && "200px",
+          }}
+        />
       </Box>
       <Box
         sx={{
-          height: "90%",
+          height: "auto",
           marginTop: "20px",
           width: "100%",
-          padding: "40px",
+          padding: isMobile ? "20px" : "40px",
           display: "flex",
+          flexDirection: isMobile ? "column" : "row",
           justifyContent: "space-between",
+          alignItems: isMobile ? "center" : "flex-start",
+          textAlign: isMobile && "center",
         }}
       >
-        <Box sx={{ width: "30%" }}>
+        <Box sx={{ width: isMobile ? "100%" : "30%" }}>
           {subjectsLeft.map((subject, index) => (
             <Box key={index} sx={{ marginBottom: "40px" }}>
               <Typography
                 variant="h4"
                 sx={{
                   fontFamily: "Gupter",
-                  fontSize: "42px",
+                  fontSize: isMobile ? "28px" : "42px",
                   fontWeight: "bold",
+                  textAlign: isMobile ? "center" : "left",
                 }}
               >
                 {subject.title}
               </Typography>
               <Typography
                 variant="body1"
-                sx={{ fontFamily: "Gupter", color: "#98A2B3" }}
+                sx={{
+                  fontFamily: "Gupter",
+                  color: "#98A2B3",
+                  textAlign: isMobile ? "center" : "left",
+                }}
               >
                 {subject.description}
               </Typography>
             </Box>
           ))}
         </Box>
-        <Box>
-          <img src={devider} alt="devider" />
-        </Box>
-        <Box sx={{ width: "30%", marginRight: "20px" }}>
+        {!isMobile && (
+          <Box>
+            <img src={devider} alt="Divider" />
+          </Box>
+        )}
+        <Box
+          sx={{
+            width: isMobile ? "100%" : "30%",
+            marginTop: isMobile ? "20px" : "0",
+            marginRight: "20px",
+          }}
+        >
           {subjectsRight.map((subject, index) => (
             <Box key={index} sx={{ marginBottom: "40px" }}>
               <Typography
                 variant="h4"
                 sx={{
                   fontFamily: "Gupter",
-                  fontSize: "42px",
+                  fontSize: isMobile ? "28px" : "42px",
                   fontWeight: "bold",
+                  textAlign: isMobile ? "center" : "left",
                 }}
               >
                 {subject.title}
               </Typography>
               <Typography
                 variant="body1"
-                sx={{ fontFamily: "Gupter", color: "#98A2B3" }}
+                sx={{
+                  fontFamily: "Gupter",
+                  color: "#98A2B3",
+                  textAlign: isMobile ? "center" : "left",
+                }}
               >
                 {subject.description}
               </Typography>

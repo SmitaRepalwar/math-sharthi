@@ -16,7 +16,7 @@ const Header = ({ onClickMobileSidebar }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return isMobile ? (
-    <AppBar position="fixed" sx={{ backgroundColor: "#1976d2" }}>
+    <AppBar position="fixed" sx={{ backgroundColor: "#5e5d5d" }}>
       <Toolbar>
         {/* Left-side toggle button */}
         <IconButton

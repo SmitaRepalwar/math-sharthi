@@ -1,4 +1,4 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Divider, Typography, useMediaQuery } from "@mui/material";
 import { keyframes } from "@mui/system";
 import displayBg from "../../public/displayBg.jpg";
 import animationImage1 from "../../public/animationImage1.png";
@@ -11,21 +11,19 @@ import mathLearn from "../../public/mathLearn.jpg";
 import { useState } from "react";
 
 const ServiceCard = ({ image, text }) => {
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   return (
     <Box
       sx={{
-        width: "20%",
-        height: "100%",
-        margin: "20px",
+        width: isMobile ? "80%" : "20%",
+        height: isMobile ? "30%" : "100%",
+        margin: "8px",
         backgroundColor: "#171717",
         opacity: "0.6",
         borderRadius: "50px",
         border: "1px solid #bfbfbf",
         position: "relative",
-        // display: "flex",
-        // flexDirection: "column",
-        // justifyContent: "flex-start",
-        // alignItems: "center",
         color: "#bfbfbf",
         "&:hover": {
           backgroundColor: "#FEB273",
@@ -59,36 +57,35 @@ const ServiceCard = ({ image, text }) => {
       />
       <Box
         sx={{
-          height: "50%",
-          width: "70%",
+          height: isMobile ? "40%" : "50%",
+          width: isMobile ? "90%" : "70%",
           backgroundColor: "#807f7d",
           borderRadius: "20px",
           position: "absolute",
-          left: "15%",
-          top: "28%",
+          left: isMobile ? "5%" : "15%",
+          top: isMobile ? "40%" : "28%",
         }}
       ></Box>
       <Box
         sx={{
-          height: "56%",
-          width: "76%",
+          height: isMobile ? "46%" : "56%",
+          width: isMobile ? "96%" : "76%",
           backgroundColor: "#bfbfbf",
           borderRadius: "20px",
           position: "absolute",
-          left: "11%",
-          top: "31%",
+          left: isMobile ? "2%" : "11%",
+          top: isMobile ? "43%" : "31%",
         }}
       ></Box>
       <img
         src={image}
         style={{
-          height: "62%",
-          width: "82%",
-          // zIndex: 3,
+          height: isMobile ? "52%" : "62%",
+          width: isMobile ? "100%" : "82%",
           position: "absolute",
-          left: "8%",
+          left: isMobile ? "0%" : "8%",
           borderRadius: "20px",
-          top: "34%",
+          top: isMobile ? "45%" : "34%",
         }}
       />
     </Box>
@@ -96,6 +93,8 @@ const ServiceCard = ({ image, text }) => {
 };
 
 export const ServiceSection = () => {
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   const cardInfo = [
     { image: scan, text: "Scan" },
     { image: mathSolve, text: "Solve" },
@@ -115,13 +114,13 @@ export const ServiceSection = () => {
   return (
     <Box
       sx={{
-        height: "13%",
+        height: isMobile ? "140vh" : "13%",
         width: "100%",
         backgroundImage: `url(${displayBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         borderRadius: "50px",
-        padding: "20px 0px 40px 0px",
+        padding: isMobile ? "10px 0px 20px 0px" : "20px 0px 40px 0px",
       }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
@@ -132,24 +131,30 @@ export const ServiceSection = () => {
           width: "100%",
           height: "50px",
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: isMobile ? "space-around" : "space-between",
           alignItems: "center",
-          padding: "20px 0px 40px 0px",
+          padding: isMobile ? "10px 0px 20px 0px" : "20px 0px 40px 0px",
           color: "#ffffff",
+          flexDirection: isMobile ? "column" : "row",
         }}
       >
-        <Box sx={{ width: "40%" }}>
+        <Box sx={{ width: isMobile ? "90%" : "40%" }}>
           <Typography
             variant="h4"
             align="center"
             gutterBottom
-            sx={{ fontFamily: "Gupter", fontSize: "42px" }}
+            sx={{ fontFamily: "Gupter", fontSize: isMobile ? "32px" : "42px" }}
           >
             My <span style={{ color: "#ff7a33" }}>Sevices</span>
           </Typography>
         </Box>
-        <Box sx={{ width: "40%" }}>
-          <Typography>
+        <Box sx={{ width: isMobile ? "90%" : "40%" }}>
+          <Typography
+            sx={{
+              fontSize: isMobile ? "14px" : "16px",
+              textAlign: isMobile ? "center" : "left",
+            }}
+          >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu
             congue ligula, eget lobortis augue. Pellentesque
           </Typography>
@@ -159,10 +164,11 @@ export const ServiceSection = () => {
         src={animationImage1}
         alt="animationImage1"
         style={{
-          height: "60%",
-          width: "20%",
+          height: isMobile ? "30%" : "60%",
+          width: isMobile ? "50%" : "20%",
           position: "relative",
-          left: "80%",
+          left: isMobile ? "55%" : "80%",
+          top: isMobile && "61%",
           animation: hoverClouds && "move1 2s infinite alternate",
         }}
       />
@@ -170,11 +176,11 @@ export const ServiceSection = () => {
         src={animationImage2}
         alt="animationImage2"
         style={{
-          height: "60%",
-          width: "20%",
+          height: isMobile ? "30%" : "60%",
+          width: isMobile ? "50%" : "20%",
           position: "relative",
-          left: "20%",
-          bottom: "30%",
+          left: isMobile ? "10%" : "20%",
+          bottom: isMobile ? "15%" : "30%",
           animation: hoverClouds && "move2 2s infinite alternate",
         }}
       />
@@ -182,22 +188,23 @@ export const ServiceSection = () => {
         src={animationImage3}
         alt="animationImage3"
         style={{
-          height: "60%",
-          width: "20%",
+          height: isMobile ? "30%" : "60%",
+          width: isMobile ? "50%" : "20%",
           position: "relative",
-          right: "40%",
+          right: isMobile ? "15%" : "40%",
           animation: hoverClouds && "move3 2s infinite alternate",
         }}
       />
       <Box
         sx={{
-          height: "60%",
+          height: isMobile ? "95%" : "60%",
           width: "100%",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           position: "relative",
-          bottom: "50%",
+          bottom: isMobile ? "60%" : "50%",
+          flexDirection: isMobile ? "column" : "row",
         }}
       >
         {cardInfo.map((info, index) => (

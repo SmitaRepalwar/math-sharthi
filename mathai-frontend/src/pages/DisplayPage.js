@@ -12,6 +12,7 @@ import { GetPersonalAppSection } from "../components/DisplayComponents/GetPerson
 import { ExploreOptionSection } from "../components/DisplayComponents/ExploreOptionSection";
 import { MathMindSection } from "../components/DisplayComponents/MathMindSection";
 import { Footer } from "../components/DisplayComponents/Footer";
+import { display, textAlign, width } from "@mui/system";
 
 const DisplayPage = () => {
   const [hover, setHover] = useState(false);
@@ -30,10 +31,10 @@ const DisplayPage = () => {
   const headerStyles = {
     position: "absolute",
     zIndex: 0,
-    left: hover ? (isMobile ? "30%" : "650px") : isMobile ? "10%" : "350px",
-    top: hover ? "100%" : "10%",
-    height: hover ? "0px" : isMobile ? "30%" : "42%",
-    width: hover ? "0px" : isMobile ? "80%" : "48%",
+    left: hover ? (isMobile ? "10%" : "650px") : isMobile ? "10%" : "350px",
+    top: hover ? "100%" : isMobile ? "30%" : "10%",
+    height: hover ? "0px" : isMobile ? "25%" : "42%",
+    width: hover ? "0px" : isMobile ? "60%" : "48%",
     transition: "0.5s ease",
   };
 
@@ -41,37 +42,37 @@ const DisplayPage = () => {
     zIndex: 2,
     position: "absolute",
     right: isMobile ? "10%" : "70%",
-    top: hover ? "20%" : "50%",
-    height: isMobile ? "20%" : "30%",
-    width: isMobile ? "60%" : "19%",
+    top: hover ? "40%" : "50%",
+    height: isMobile ? "15%" : "30%",
+    width: isMobile ? "30%" : "19%",
     transition: "0.5s ease",
   };
 
   const equationStyles = {
     zIndex: 2,
     position: "absolute",
-    left: hover ? (isMobile ? "10%" : "280px") : isMobile ? "30%" : "650px",
-    top: hover ? "0%" : "110%",
-    height: hover ? "90%" : "0%",
+    left: hover ? (isMobile ? "0%" : "280px") : isMobile ? "0%" : "650px",
+    top: hover ? (isMobile ? "13%" : "0%") : "110%",
+    height: hover ? (isMobile ? "50%" : "90%") : "0%",
     width: hover ? (isMobile ? "80%" : "60%") : "0%",
     transition: "0.5s ease",
   };
 
   const girlStyles = {
     position: "absolute",
-    left: isMobile ? "5%" : "28%",
+    left: isMobile ? "-1%" : "28%",
     bottom: "0%",
     zIndex: 3,
-    height: isMobile ? "60%" : "90%",
+    height: isMobile ? "75%" : "90%",
     width: isMobile ? "90%" : "50%",
   };
 
   const ellipseStyles = {
     position: "absolute",
-    right: isMobile ? "5%" : "25%",
+    right: isMobile ? "25%" : "25%",
     bottom: "0%",
     height: isMobile ? "30%" : "58%",
-    width: isMobile ? "90%" : "45%",
+    width: isMobile ? "60%" : "45%",
   };
 
   return (
@@ -92,7 +93,7 @@ const DisplayPage = () => {
         <Box
           sx={{
             width: "100%",
-            height: "600vh",
+            height: isMobile ? "800vh" : "600vh",
             overflowY: "hidden",
             padding: "40px 0px 40px 0px",
             scrollbarWidth: "none",
@@ -106,10 +107,11 @@ const DisplayPage = () => {
           <Box
             sx={{
               width: "100%",
-              height: "14%",
+              height: isMobile ? "40vh" : "14%",
               display: "flex",
               flexDirection: "column",
               position: "relative",
+              padding: "20px",
             }}
           >
             <img src={headerText} style={headerStyles} />
@@ -124,6 +126,7 @@ const DisplayPage = () => {
             <img src={Ellipse2} style={ellipseStyles} />
           </Box>
           <ServiceSection />
+
           <MathExplainedSection />
           <GetPersonalAppSection />
           <ExploreOptionSection />

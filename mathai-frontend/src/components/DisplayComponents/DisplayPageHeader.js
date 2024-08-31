@@ -6,11 +6,11 @@ import {
   useMediaQuery,
   useTheme,
   IconButton,
-  Popover,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../../public/Logo.png";
-import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 
@@ -27,33 +27,8 @@ const DisplayPageHeader = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
   const open = Boolean(anchorEl);
-
-  const NavButton = styled(Button)({
-    borderRadius: "30px",
-    padding: "10px 20px",
-    color: "white",
-    fontWeight: "bold",
-    "&.active": {
-      backgroundColor: "#0099FF",
-    },
-  });
-
-  const LoginButton = styled(Button)({
-    borderRadius: "30px",
-    padding: "10px 20px",
-    color: "white",
-    backgroundColor: "#FF8C00",
-    marginLeft: "10px",
-  });
-
-  const SignupButton = styled(Button)({
-    borderRadius: "30px",
-    padding: "10px 20px",
-    color: "white",
-    backgroundColor: "#FF8C00",
-    marginLeft: "10px",
-  });
 
   return (
     <Grid
@@ -61,33 +36,37 @@ const DisplayPageHeader = () => {
       container
       sx={{
         width: "100vw",
-        height: isMobile ? "20px" : "10vh",
+        height: isMobile ? "60px" : "10vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        marginTop: !isMobile && "20px",
       }}
     >
-      <Grid item xs={2}>
-        <img
-          src={Logo}
-          alt="logo"
-          style={{
-            width: isMobile ? "100%" : "60%",
-            height: isMobile ? "100%" : "60%",
-          }}
-        />
-      </Grid>
-      <Grid item xs={10}>
+      {!isMobile && (
+        <Grid item md={1.5}>
+          <img
+            src={Logo}
+            alt="logo"
+            style={{
+              width: "60%",
+              height: "60%",
+            }}
+          />
+        </Grid>
+      )}
+      <Grid item sm={12} md={10.5}>
         <Box
           sx={{
             background: "#171717",
-            width: "80vw",
-            height: "10vh",
+            width: isMobile ? "95vw" : "80vw",
+            height: "100%",
             gap: "10px",
             borderRadius: "50px",
             display: "flex",
             justifyContent: "space-around",
             alignItems: "center",
+            padding: isMobile ? "5px" : "10px",
           }}
         >
           {isMobile ? (
@@ -95,98 +74,192 @@ const DisplayPageHeader = () => {
               <IconButton onClick={handleMenuClick} sx={{ color: "white" }}>
                 <MenuIcon />
               </IconButton>
-              <SignupButton onClick={() => navigate("/signup")}>
+              <Button
+                onClick={() => navigate("/signup")}
+                sx={{
+                  borderRadius: "30px",
+                  padding: "10px 20px",
+                  color: "white",
+                  backgroundColor: "#FF8C00",
+                  marginLeft: "10px",
+                }}
+              >
                 SIGN UP/LOGIN
-              </SignupButton>
-              <Popover
-                open={open}
+              </Button>
+              <img
+                src={Logo}
+                alt="logo"
+                style={{
+                  width: "30px",
+                  height: "30px",
+                }}
+              />
+
+              <Menu
                 anchorEl={anchorEl}
+                open={open}
                 onClose={handleMenuClose}
                 anchorOrigin={{
                   vertical: "bottom",
-                  horizontal: "center", // Changed to center for better alignment
-                }}
-                transformOrigin={{
-                  vertical: "top", // Added transformOrigin for positioning
                   horizontal: "center",
                 }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "center",
+                }}
+                sx={{
+                  mt: 1, // Adjust spacing between button and menu
+                }}
               >
-                <Box sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <NavButton
-                    component={HashLink}
-                    smooth
-                    to="#home"
-                    onClick={handleMenuClose}
-                  >
-                    Home
-                  </NavButton>
-                  <NavButton
-                    component={HashLink}
-                    smooth
-                    to="#about"
-                    onClick={handleMenuClose}
-                  >
-                    About
-                  </NavButton>
-                  <NavButton
-                    component={HashLink}
-                    smooth
-                    to="#service"
-                    onClick={handleMenuClose}
-                  >
-                    Service
-                  </NavButton>
-                  <NavButton
-                    component={HashLink}
-                    smooth
-                    to="#pricing"
-                    onClick={handleMenuClose}
-                  >
-                    Pricing
-                  </NavButton>
-                  <NavButton
-                    component={HashLink}
-                    smooth
-                    to="#contact"
-                    onClick={handleMenuClose}
-                  >
-                    Contact
-                  </NavButton>
-                  <LoginButton
-                    onClick={() => {
-                      navigate("/login");
-                      handleMenuClose();
-                    }}
-                  >
-                    LOGIN/SIGNUP
-                  </LoginButton>
-                </Box>
-              </Popover>
+                <MenuItem
+                  component={HashLink}
+                  smooth
+                  to="#home"
+                  onClick={handleMenuClose}
+                >
+                  Home
+                </MenuItem>
+                <MenuItem
+                  component={HashLink}
+                  smooth
+                  to="#about"
+                  onClick={handleMenuClose}
+                >
+                  About
+                </MenuItem>
+                <MenuItem
+                  component={HashLink}
+                  smooth
+                  to="#service"
+                  onClick={handleMenuClose}
+                >
+                  Service
+                </MenuItem>
+                <MenuItem
+                  component={HashLink}
+                  smooth
+                  to="#pricing"
+                  onClick={handleMenuClose}
+                >
+                  Pricing
+                </MenuItem>
+                <MenuItem
+                  component={HashLink}
+                  smooth
+                  to="#contact"
+                  onClick={handleMenuClose}
+                >
+                  Contact
+                </MenuItem>
+              </Menu>
             </>
           ) : (
             <>
-              <NavButton component={HashLink} smooth to="#home">
+              <Button
+                component={HashLink}
+                smooth
+                to="#home"
+                sx={{
+                  borderRadius: "30px",
+                  padding: "10px 20px",
+                  color: "white",
+                  fontWeight: "bold",
+                  "&.active": {
+                    backgroundColor: "#0099FF",
+                  },
+                }}
+              >
                 Home
-              </NavButton>
-              <NavButton component={HashLink} smooth to="#about">
+              </Button>
+              <Button
+                component={HashLink}
+                smooth
+                to="#about"
+                sx={{
+                  borderRadius: "30px",
+                  padding: "10px 20px",
+                  color: "white",
+                  fontWeight: "bold",
+                  "&.active": {
+                    backgroundColor: "#0099FF",
+                  },
+                }}
+              >
                 About
-              </NavButton>
-              <NavButton component={HashLink} smooth to="#service">
+              </Button>
+              <Button
+                component={HashLink}
+                smooth
+                to="#service"
+                sx={{
+                  borderRadius: "30px",
+                  padding: "10px 20px",
+                  color: "white",
+                  fontWeight: "bold",
+                  "&.active": {
+                    backgroundColor: "#0099FF",
+                  },
+                }}
+              >
                 Service
-              </NavButton>
-              <NavButton component={HashLink} smooth to="#pricing">
+              </Button>
+              <Button
+                component={HashLink}
+                smooth
+                to="#pricing"
+                sx={{
+                  borderRadius: "30px",
+                  padding: "10px 20px",
+                  color: "white",
+                  fontWeight: "bold",
+                  "&.active": {
+                    backgroundColor: "#0099FF",
+                  },
+                }}
+              >
                 Pricing
-              </NavButton>
-              <NavButton component={HashLink} smooth to="#contact">
+              </Button>
+              <Button
+                component={HashLink}
+                smooth
+                to="#contact"
+                sx={{
+                  borderRadius: "30px",
+                  padding: "10px 20px",
+                  color: "white",
+                  fontWeight: "bold",
+                  "&.active": {
+                    backgroundColor: "#0099FF",
+                  },
+                }}
+              >
                 Contact
-              </NavButton>
+              </Button>
               <Box>
-                <LoginButton onClick={() => navigate("/login")}>
+                <Button
+                  onClick={() => navigate("/login")}
+                  sx={{
+                    borderRadius: "30px",
+                    padding: "10px 20px",
+                    color: "white",
+                    backgroundColor: "#FF8C00",
+                    marginLeft: "10px",
+                  }}
+                >
                   LOGIN
-                </LoginButton>
-                <SignupButton onClick={() => navigate("/signup")}>
+                </Button>
+                <Button
+                  onClick={() => navigate("/signup")}
+                  sx={{
+                    borderRadius: "30px",
+                    padding: "10px 20px",
+                    color: "white",
+                    backgroundColor: "#FF8C00",
+                    marginLeft: "10px",
+                  }}
+                >
                   SIGN UP
-                </SignupButton>
+                </Button>
               </Box>
             </>
           )}

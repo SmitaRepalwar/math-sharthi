@@ -1,77 +1,34 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
-  Grid,
-  IconButton,
-  Typography,
-} from "@mui/material";
-import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-
-// const MathMindCard = ({ image, title, description }) => {
-//   return (
-//     <Card sx={{ maxWidth: 345, position: "relative" }}>
-//       <CardMedia component="img" height="140" image={image} alt={title} />
-//       <CardContent>
-//         <Typography gutterBottom variant="h6" component="div">
-//           {title}
-//         </Typography>
-//         <Typography variant="body2" color="text.secondary">
-//           {description}
-//         </Typography>
-//       </CardContent>
-//       <IconButton
-//         sx={{
-//           position: "absolute",
-//           bottom: 16,
-//           right: 16,
-//           backgroundColor: "#2c2c2c",
-//           color: "#ffffff",
-//           "&:hover": {
-//             backgroundColor: "#2c2c2c",
-//           },
-//         }}
-//       >
-//         <ArrowCircleRightIcon />
-//       </IconButton>
-//     </Card>
-//   );
-// };
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 
 export const MathMindSection = () => {
-  const cardsData = [
-    {
-      image: "/path-to-your-image1.jpg",
-      title: "Math from all angles: Photomath for different learning styles",
-      description:
-        "Math from all angles: Photomath for different learning styles",
-    },
-    {
-      image: "/path-to-your-image2.jpg",
-      title: "Study Tips to Find Your Focus and Ace Your Next Math Test",
-      description: "Study Tips to Find Your Focus and Ace Your Next Math Test",
-    },
-    {
-      image: "/path-to-your-image3.jpg",
-      title: "Overcoming Math Anxiety: How to Conquer Fear & Build Confidence",
-      description:
-        "Overcoming Math Anxiety: How to Conquer Fear & Build Confidence",
-    },
-  ];
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Box sx={{ padding: 4, backgroundColor: "#F4F4F4" }} id="about">
+    <Box
+      sx={{
+        padding: isMobile ? 2 : 4,
+        backgroundColor: "#F4F4F4",
+        textAlign: isMobile ? "center" : "left",
+      }}
+      id="about"
+    >
       <Typography
-        variant="h4"
+        variant={isMobile ? "h5" : "h4"}
         gutterBottom
-        sx={{ fontFamily: "Gupter", fontSize: "42px" }}
+        sx={{
+          fontFamily: "Gupter",
+          fontSize: isMobile ? "32px" : "42px",
+        }}
       >
         About <span style={{ color: "#ff7a33" }}>Us</span>
       </Typography>
       <Typography
-        sx={{ fontFamily: "Gupter", fontSize: "22px", color: "#98A2B3" }}
+        sx={{
+          fontFamily: "Gupter",
+          fontSize: isMobile ? "18px" : "22px",
+          color: "#98A2B3",
+        }}
       >
         Welcome to Math Sharthi, your trusted companion on the journey to
         mastering mathematics. Whether you're a student looking to strengthen
@@ -90,30 +47,6 @@ export const MathMindSection = () => {
         a user-friendly experience. Join us at Math Sharthi and discover the joy
         of learning math with a partner you can trust.
       </Typography>
-      {/* <Grid container spacing={2}>
-        {cardsData.map((card, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <MathMindCard
-              image={card.image}
-              title={card.title}
-              description={card.description}
-            />
-          </Grid>
-        ))}
-      </Grid>
-      <Button
-        variant="contained"
-        sx={{
-          mt: 3,
-          backgroundColor: "#ff7f50",
-          color: "#ffffff",
-          "&:hover": {
-            backgroundColor: "#ff7f50",
-          },
-        }}
-      >
-        See All
-      </Button> */}
     </Box>
   );
 };
